@@ -1,0 +1,165 @@
+/* Reset básico */
+body, h1, h2, p, button, a {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Estilo general del cuerpo */
+body {
+    line-height: 1.6;
+    background-color: #f9f9f9;
+    color: #030303;
+}
+
+/* Estilo del header */
+header {
+    background: #020202;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between; /* Para alinear el logo y los enlaces */
+    align-items: center;
+}
+
+.logo-img {
+    height: 60px; /* Ajusta el tamaño de la imagen */
+    object-fit: contain; /* Asegura que la imagen mantenga su aspecto */
+    border-radius: 0px; /* Bordes redondeados si lo deseas */
+}
+
+/* Menú de navegación */
+header nav {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+header nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+header nav a:hover {
+    text-decoration: underline;
+}
+
+/* Contenedor principal */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.container h1 {
+    margin-bottom: 30px;
+    font-size: 28px;
+    color: #020202;
+}
+
+/* Contenedor de las tarjetas */
+.tramites-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+/* Estilo de las tarjetas */
+.tramite-card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.tramite-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.tramite-card img {
+    width: 100px;
+    height: 70px;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+/* Estilo de los títulos y descripciones */
+.tramite-card h2 {
+    font-size: 20px;
+    color: #020202;
+    margin-bottom: 10px;
+}
+
+.tramite-card p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* Botones */
+button {
+    background-color: #020202;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #020202;
+}
+
+/* Pie de página */
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background: #020202;
+    color: white;
+    margin-top: 30px;
+    font-size: 14px;
+}
+
+footer p {
+    margin: 0;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Alineación de perfil, información y mensaje a la izquierda */
+.profile-info-message-container {
+    display: flex;
+    flex-direction: column; /* Para que los elementos estén en columna */
+    align-items: flex-start; /* Alinea los elementos a la izquierda */
+    gap: 15px; /* Espacio entre los elementos */
+}
+
+.profile-info-message-container div {
+    width: 100%;
+}
+
+/* Opcional: estilo para los elementos específicos */
+.profile-info-message-container .profile,
+.profile-info-message-container .information,
+.profile-info-message-container .message {
+    padding: 10px;
+    background-color: #fff; /* Fondo blanco */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

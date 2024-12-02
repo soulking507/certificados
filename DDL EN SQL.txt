@@ -1,0 +1,354 @@
+DDL EN SQL
+
+-- Tabla Usuario
+CREATE TABLE Usuario (
+  id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(50),
+  apellido VARCHAR(50),
+  correo VARCHAR(100) UNIQUE,
+  contraseña VARCHAR(255),
+  estado ENUM('Activo', 'Inactivo'),
+  id_ubicacion INT,
+  id_programa INT,
+  id_rol INT,
+  FOREIGN KEY (id_ubicacion) REFERENCES Ubicacion(id_ubicacion),
+  FOREIGN KEY (id_programa) REFERENCES Programa_Academico(id_programa),
+  FOREIGN KEY (id_rol) REFERENCES Rol(id_rol)
+);
+
+-- Tabla Permiso
+CREATE TABLE Permiso (
+  id_permiso INT AUTO_INCREMENT PRIMARY KEY,
+  nombre_permiso VARCHAR(50),
+  id_rol INT,
+  FOREIGN KEY (id_rol) REFERENCES Rol(id_rol)
+);
+
+-- Tabla Usuario_Permiso
+CREATE TABLE Usuario_Permiso (
+  id_usuario INT,
+  id_permiso INT,
+  FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario),
+  FOREIGN KEY (id_permiso) REFERENCES Permiso(id_permiso)
+);
+
+-- Tabla Certificado
+CREATE TABLE Certificado (
+  id_certificado INT AUTO_INCREMENT PRIMARY KEY,
+  codigo_unico VARCHAR(20) UNIQUE,
+  fecha_emision DATE,
+  estado ENUM('Emitido', 'Anulado'),
+  id_usuario INT,
+  id_integracion INT NULL,
+  id_ubicacion INT NULL,
+  FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario),
+  FOREIGN KEY (id_integracion) REFERENCES Integracion_Terceros(id_integracion),
+  FOREIGN KEY (id_ubicacion) REFERENCES Ubicacion(id_ubicacion)
+);
+
+-- Tabla Historial_Certificado
+CREATE TABLE Historial_Certificado (
+  id_historial INT AUTO_INCREMENT PRIMARY KEY,
+  id_certificado INT,
+  fecha DATETIME,
+  estado ENUM('Emitido', 'Anulado'),
+  descripcion_cambio TEXT,
+  FOREIGN KEY (id_certificado) REFERENCES Certificado(id_certificado)
+);
+
+-- Tabla Notificacion
+CREATE TABLE Notificacion (
+  id_notificacion INT AUTO_INCREMENT PRIMARY KEY,
+  id_usuario INT,
+  id_certificado INT NULL,
+  mensaje TEXT,
+  fecha_envio DATETIME,
+  estado ENUM('Pendiente', 'Enviado'),
+  id_integracion INT NULL,
+  FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario),
+  FOREIGN KEY (id_certificado) REFERENCES Certificado(id_certificado),
+  FOREIGN KEY (id_integracion) REFERENCES Integracion_Terceros(id_integracion)
+);
+
+-- Tabla Informe
+CREATE TABLE Informe (
+  id_informe INT AUTO_INCREMENT PRIMARY KEY,
+  tipo_informe VARCHAR(50),
+  fecha_generacion DATE,
+  contenido TEXT,
+  id_usuario_generado INT,
+  FOREIGN KEY (id_usuario_generado) REFERENCES Usuario(id_usuario)
+);
+
+-- Tabla Sistema_Integracion
+CREATE TABLE Sistema_Integracion (
+  id_sistema INT AUTO_INCREMENT PRIMARY KEY,
+  nombre_sistema VARCHAR(50),
+  descripcion TEXT,
+  api_endpoint VARCHAR(255),
+  fecha_incorporacion DATE,
+  id_usuario INT NULL,
+  FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
+);
+
+-- Tabla Requisito_Titulacion
+CREATE TABLE Requisito_Titulacion (
+  id_requisito INT AUTO_INCREMENT PRIMARY KEY,
+  nombre_requisito VARCHAR(50),
+  descripcion TEXT,
+  id_programa INT,
+  FOREIGN KEY (id_programa) REFERENCES Programa_Academico(id_programa)
+);
+
+-- Tabla Certificado_Temporal
+CREATE TABLE Certificado_Temporal (
+  id_certificado_temporal INT AUTO_INCREMENT PRIMARY KEY,
+  codigo_temporal VARCHAR(20) UNIQUE,
+  fecha_emision DATE,
+  fecha_vencimiento DATE,
+  id_usuario INT,
+  FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
+);
+
+-- Tabla Auditoria
+CREATE TABLE Auditoria (
+  id_auditoria INT AUTO_INCREMENT PRIMARY KEY,
+  id_usuario INT,
+  accion TEXT,
+  fecha DATETIME,
+  id_rol INT NULL,
+  id_ubicacion INT NULL,
+  FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario),
+  FOREIGN KEY (id_rol) REFERENCES Rol(id_rol),
+  FOREIGN KEY (id_ubicacion) REFERENCES Ubicacion(id_ubicacion)
+);
+
+-- Tabla Backup
+CREATE TABLE Backup (
+  id_backup INT AUTO_INCREMENT PRIMARY KEY,
+  fecha_backup DATETIME,
+  tipo_backup ENUM('Regular', 'Seguridad'),
+  ubicacion_archivo VARCHAR(255),
+  id_auditoria INT NULL,
+  id_rol INT NULL,
+  FOREIGN KEY (id_auditoria) REFERENCES Auditoria(id_auditoria),
+  FOREIGN KEY (id_rol) REFERENCES Rol(id_rol)
+);
+
+-- Tabla Estadisticas
+CREATE TABLE Estadisticas (
+  id_estadistica INT AUTO_INCREMENT PRIMARY KEY,
+  tipo_estadistica VARCHAR(50),
+  valor INT,
+  fecha_registro DATE,
+  id_certificado INT NULL,
+  id_rol INT NULL,
+  FOREIGN KEY (id_certificado) REFERENCES Certificado(id_certificado),
+  FOREIGN KEY (id_rol) REFERENCES Rol(id_rol)
+);
+
+-- Tabla Error
+CREATE TABLE Error (
+  id_error INT AUTO_INCREMENT PRIMARY KEY,
+  descripcion TEXT,
+  fecha_reportado DATETIME,
+  id_usuario INT,
+  FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
+);
+
+-- Tabla Integracion_Terceros
+CREATE TABLE Integracion_Terceros (
+  id_integracion INT AUTO_INCREMENT PRIMARY KEY,
+  nombre_servicio VARCHAR(50),
+  descripcion TEXT,
+  api_endpoint VARCHAR(255),
+  fecha_incorporacion DATE
+);
+
+-- Tabla Ubicacion
+CREATE TABLE Ubicacion (
+  id_ubicacion INT AUTO_INCREMENT PRIMARY KEY,
+  pais VARCHAR(50),
+  ciudad VARCHAR(50),
+  direccion VARCHAR(100)
+);
+
+-- Tabla Rol
+CREATE TABLE Rol (
+  id_rol INT AUTO_INCREMENT PRIMARY KEY,
+  nombre_rol VARCHAR(50)
+);
+
+-- Tabla Curso
+CREATE TABLE Curso (
+  id_curso INT AUTO_INCREMENT PRIMARY KEY,
+  nombre_curso VARCHAR(100),
+  descripcion TEXT,
+  id_usuario_docente INT,
+  FOREIGN KEY (id_usuario_docente) REFERENCES Usuario(id_usuario)
+);
+
+-- Tabla Estudiante_Curso
+CREATE TABLE Estudiante_Curso (
+  id_estudiante_curso INT AUTO_INCREMENT PRIMARY KEY,
+  id_usuario_estudiante INT,
+  id_curso INT,
+  fecha_inscripcion DATE,
+  FOREIGN KEY (id_usuario_estudiante) REFERENCES Usuario(id_usuario),
+  FOREIGN KEY (id_curso) REFERENCES Curso(id_curso)
+);
+
+-- Tabla Programa_Academico
+CREATE TABLE Programa_Academico (
+  id_programa INT AUTO_INCREMENT PRIMARY KEY,
+  nombre_programa VARCHAR(100),
+  nivel ENUM('Pregrado', 'Posgrado', 'Doctorado'),
+  descripcion TEXT
+);
+
+-- Tabla Documento
+CREATE TABLE Documento (
+  id_documento INT AUTO_INCREMENT PRIMARY KEY,
+  tipo_documento ENUM('Identidad', 'Pasaporte', 'Visa'),
+  numero_documento VARCHAR(20),
+  id_usuario INT,
+  FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
+);
+
+-- Tabla Sesion
+CREATE TABLE Sesion (
+  id_sesion INT AUTO_INCREMENT PRIMARY KEY,
+  id_usuario INT,
+  fecha_inicio DATETIME,
+  fecha_fin DATETIME,
+  direccion_ip VARCHAR(50),
+  FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
+);
+
+-- Tabla Evento
+CREATE TABLE Evento (
+  id_evento INT AUTO_INCREMENT PRIMARY KEY,
+  nombre_evento VARCHAR(100),
+  descripcion TEXT,
+  fecha_evento DATETIME,
+  id_ubicacion INT,
+  FOREIGN KEY (id_ubicacion) REFERENCES Ubicacion(id_ubicacion)
+);
+
+-- Tabla Asistencia
+CREATE TABLE Asistencia (
+  id_asistencia INT AUTO_INCREMENT PRIMARY KEY,
+  id_evento INT,
+  id_usuario INT,
+  fecha_asistencia DATETIME,
+  FOREIGN KEY (id_evento) REFERENCES Evento(id_evento),
+  FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
+);
+
+-- Tabla Log
+CREATE TABLE Log (
+  id_log INT AUTO_INCREMENT PRIMARY KEY,
+  id_usuario INT NULL,
+  accion TEXT,
+  fecha DATETIME,
+  FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
+);
+
+-- Tabla Actividad
+CREATE TABLE Actividad (
+  id_actividad INT AUTO_INCREMENT PRIMARY KEY,
+  nombre_actividad VARCHAR(100),
+  descripcion TEXT,
+  id_curso INT,
+  FOREIGN KEY (id_curso) REFERENCES Curso(id_curso)
+);
+
+-- Tabla Entrega
+CREATE TABLE Entrega (
+  id_entrega INT AUTO_INCREMENT PRIMARY KEY,
+  id_actividad INT,
+  id_usuario INT,
+  fecha_entrega DATETIME,
+  calificacion FLOAT,
+  FOREIGN KEY (id_actividad) REFERENCES Actividad(id_actividad),
+  FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
+);
+
+-- Tabla Plan_Estudios
+CREATE TABLE Plan_Estudios (
+  id_plan INT AUTO_INCREMENT PRIMARY KEY,
+  nombre_plan VARCHAR(100),
+  id_programa INT,
+  FOREIGN KEY (id_programa) REFERENCES Programa_Academico(id_programa)
+);
+
+-- Tabla Recurso
+CREATE TABLE Recurso (
+  id_recurso INT AUTO_INCREMENT PRIMARY KEY,
+  nombre_recurso VARCHAR(100),
+  tipo ENUM('Documento', 'Video', 'Presentación'),
+  url_recurso VARCHAR(255),
+  id_curso INT,
+  FOREIGN KEY (id_curso) REFERENCES Curso(id_curso)
+);
+
+-- Tabla Comentario
+CREATE TABLE Comentario (
+  id_comentario INT AUTO_INCREMENT PRIMARY KEY,
+  id_usuario INT,
+  id_curso INT NULL,
+  texto TEXT,
+  fecha DATETIME,
+  FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario),
+  FOREIGN KEY (id_curso) REFERENCES Curso(id_curso)
+);
+
+-- Tabla Noticia
+CREATE TABLE Noticia (
+  id_noticia INT AUTO_INCREMENT PRIMARY KEY,
+  titulo VARCHAR(100),
+  contenido TEXT,
+  fecha_publicacion DATETIME
+);
+
+-- Tabla Suscripcion
+CREATE TABLE Suscripcion (
+  id_suscripcion INT AUTO_INCREMENT PRIMARY KEY,
+  id_usuario INT,
+  id_noticia INT,
+  fecha_suscripcion DATE,
+  FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario),
+  FOREIGN KEY (id_noticia) REFERENCES Noticia(id_noticia)
+);
+
+-- Tabla Mensaje
+CREATE TABLE Mensaje (
+  id_mensaje INT AUTO_INCREMENT PRIMARY KEY,
+  id_emisor INT,
+  id_receptor INT,
+  texto TEXT,
+  fecha_envio DATETIME,
+  FOREIGN KEY (id_emisor) REFERENCES Usuario(id_usuario),
+  FOREIGN KEY (id_receptor) REFERENCES Usuario(id_usuario)
+);
+
+-- Tabla Tarea
+CREATE TABLE Tarea (
+  id_tarea INT AUTO_INCREMENT PRIMARY KEY,
+  titulo VARCHAR(100),
+  descripcion TEXT,
+  id_usuario_asignado INT,
+  fecha_vencimiento DATE,
+  FOREIGN KEY (id_usuario_asignado) REFERENCES Usuario(id_usuario)
+);
+
+-- Tabla Archivo
+CREATE TABLE Archivo (
+  id_archivo INT AUTO_INCREMENT PRIMARY KEY,
+  nombre_archivo VARCHAR(100),
+  tipo_archivo ENUM('PDF', 'Word', 'Imagen', 'Otros'),
+  url_archivo VARCHAR(255),
+  id_tarea INT NULL,
+  FOREIGN KEY (id_tarea) REFERENCES Tarea(id_tarea)
+);
+

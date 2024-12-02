@@ -1,0 +1,135 @@
+/* General */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+/* Header */
+.header-container {
+  background-color: #020202;
+  color: white;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-container .logo {
+  height: 50px;
+  width: auto;
+}
+
+.header-container .menu {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.header-container .menu:hover {
+  text-decoration: underline;
+}
+
+/* Main */
+main {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Section */
+.contenido {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Formulario e Imagen */
+.formulario-contenedor {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.formulario {
+  flex: 1;
+}
+
+.formulario h2 {
+  color: #020202;
+  margin-bottom: 20px;
+}
+
+.formulario label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.formulario input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.botones {
+  display: flex;
+  gap: 10px;
+}
+
+.enviar {
+  background-color: #020202;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.enviar:hover {
+  background-color: #020202;
+}
+
+.cancelar {
+  background-color: #020202;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cancelar:hover {
+  background-color: #020202;
+}
+
+/* Imagen */
+.imagen-certificado {
+  flex: 1;
+  text-align: center;
+}
+
+.imagen-certificado .certificado {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Mensaje */
+.mensaje {
+  padding: 10px;
+  background-color: #dff0d8;
+  color: #3c763d;
+  border: 1px solid #d6e9c6;
+  border-radius: 5px;
+  text-align: center;
+}

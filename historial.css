@@ -1,0 +1,72 @@
+/* Reset básico */
+body, h1, h2, p, label, input, button, table, th, td {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  line-height: 1.6;
+  background-color: #fff;
+}
+
+header {
+  background: #020202;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.logo-img {
+  height: 50px; /* Ajusta el tamaño de la imagen */
+  object-fit: contain; /* Asegura que la imagen mantenga su aspecto */
+  border-radius: 0px; /* Opcional: Bordes redondeados si lo deseas */
+}
+
+.header-container .menu {
+  color: white; /* Cambiar color de la fuente a blanco */
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: auto; /* Alinea el menú a la derecha */
+}
+
+.contenido {
+  margin: 20px auto;
+  padding: 20px;
+  max-width: 900px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  margin-bottom: 20px;
+  font-size: 20px;
+  color: #333;
+  text-align: left;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+thead th {
+  background: #f1f1f1;
+  padding: 10px;
+  border-bottom: 2px solid #ddd;
+}
+
+tbody td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+tbody tr:hover {
+  background: #f9f9f9;
+}

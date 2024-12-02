@@ -1,0 +1,132 @@
+/* peradmin.css */
+
+/* General */
+body {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background-color: #f8f9fa; /* Color de fondo claro similar al de la imagen */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  color: #495057; /* Color de texto gris oscuro */
+}
+
+main {
+  background: #ffffff; /* Fondo blanco para el contenido */
+  padding: 30px 40px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* Header */
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 28px;
+  font-weight: 600;
+  color: #020202; /* Azul brillante */
+}
+
+h2 {
+  margin-top: 30px;
+  font-size: 22px;
+  color: #343a40; /* Gris más oscuro */
+  text-align: center;
+}
+
+/* Formulario */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+label {
+  font-size: 15px;
+  font-weight: 500;
+  color: #6c757d; /* Gris suave */
+  margin-bottom: 8px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"] {
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ced4da; /* Borde gris claro */
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #ffffff; /* Fondo blanco */
+}
+
+input[readonly] {
+  background-color: #e9ecef;
+  cursor: not-allowed;
+}
+
+/* Botones */
+button {
+  padding: 14px 25px;
+  background-color: #020202; /* Azul brillante */
+  color: #ffffff;
+  border: 1px solid #020202;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s, transform 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3; /* Azul más oscuro al pasar el mouse */
+  border-color: #0056b3;
+  transform: translateY(-2px); /* Efecto de elevación */
+}
+
+button:focus {
+  outline: none;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); /* Efecto de enfoque azul */
+}
+
+/* Mensaje */
+.message {
+  padding: 12px;
+  margin-bottom: 25px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 15px;
+  color: #ffffff;
+}
+
+.message.success {
+  background-color: #28a745; /* Verde claro para éxito */
+}
+
+.message.error {
+  background-color: #dc3545; /* Rojo claro para error */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  main {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  h1, h2 {
+    font-size: 22px;
+  }
+
+  .divider {
+    display: none;
+  }
+}

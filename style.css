@@ -1,0 +1,138 @@
+/* General */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-container {
+    display: flex;
+    width: 90%;
+    max-width: 900px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    background-color: #ffffff;
+}
+
+/* Sección de Imagen */
+.image-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e0f7fa;
+}
+
+.graduation-image {
+    max-width: 80%;
+    height: auto;
+    border-radius: 12px;
+    object-fit: contain;
+}
+
+/* Sección del Formulario */
+.form-section {
+    flex: 1;
+    padding: 30px;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Logo */
+.logo {
+    margin-bottom: 20px;
+}
+
+.logo-img {
+    max-width: 80px;
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Formulario */
+.login-form, .register-form {
+    width: 100%;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    outline: none;
+    transition: border 0.3s ease;
+}
+
+input:focus {
+    border: 1px solid #020202;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    color: #ffffff;
+    background-color: #020202;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #020202;
+}
+
+/* Botón de cancelar */
+.cancel-btn {
+    background-color: #020202;
+}
+
+.cancel-btn:hover {
+    background-color: #020202;
+}
+
+/* Enlace de Olvidar Contraseña */
+.forgot-password {
+    font-size: 12px;
+    color: #007bff;
+    text-align: center;
+    text-decoration: none;
+    margin-top: -10px;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+/* Transiciones y animaciones */
+.hidden {
+    display: none;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+button, input {
+    transition: all 0.3s ease-in-out;
+}

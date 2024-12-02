@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráfica en Tiempo Real</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            margin-top: 20px;
+            color: #333;
+        }
+
+        canvas {
+            max-width: 80%;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Gráfica en Tiempo Real</h1>
+    <canvas id="realTimeChart"></canvas>
+
+    <script>
+        // Configuración inicial de la gráfica
+        const ctx = document.getElementById('realTimeChart').getContext('2d');
+        const realTimeChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [], // Etiquetas del eje X
+                datasets: [{
+                    label: 'Uso de Memoria (MB)',
+                    data: [], // Datos iniciales
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    fill: true,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Tiempo (s)'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Memoria (MB)'
+                        },
+                        suggestedMin: 0,
+                        suggestedMax: 500
+                    }
+                }
+            }
+        });
+
+        // Simular datos en tiempo real
+        let time = 0; // Tiempo en segundos
+        setInterval(() => {
+            // Generar un valor aleatorio para el consumo de memoria
+            const memoryUsage = Math.random() * 400 + 100; // Entre 100 MB y 500 MB
+
+            // Agregar datos a la gráfica
+            realTimeChart.data.labels.push(`${time}s`); // Agregar etiqueta de tiempo
+            realTimeChart.data.datasets[0].data.push(memoryUsage); // Agregar valor
+
+            // Mantener un máximo de 20 puntos visibles
+            if (realTimeChart.data.labels.length > 20) {
+                realTimeChart.data.labels.shift(); // Eliminar el primer elemento
+                realTimeChart.data.datasets[0].data.shift(); // Eliminar el primer valor
+            }
+
+            // Actualizar la gráfica
+            realTimeChart.update();
+
+            // Incrementar el tiempo
+            time++;
+        }, 1000); // Actualización cada segundo
+    </script>
+</body>
+</html>
